@@ -69,6 +69,14 @@ class WindowMixin(object):
         self.addToolBar(Qt.LeftToolBarArea, toolbar)
         return toolbar
 
+class SecondTab(QWidget):
+    def __init__(self):
+        super(SecondTab, self).__init__()
+
+        layout = QVBoxLayout(self)
+        label = QLabel("This is the content of the second tab.")
+        layout.addWidget(label)
+
 
 class MainWindow(QMainWindow, WindowMixin):
     FIT_WINDOW, FIT_WIDTH, MANUAL_ZOOM = list(range(3))
@@ -210,7 +218,7 @@ class MainWindow(QMainWindow, WindowMixin):
         self.file_dock.setFeatures(QDockWidget.DockWidgetFloatable)
 
         self.dock_features = QDockWidget.DockWidgetClosable | QDockWidget.DockWidgetFloatable
-        self.dock.setFeatures(self.dock.features() ^ self.dock_features)
+        self.dock.setFeatures(self.dock.features() ^ int(self.dock_features))
 
         # Actions
         action = partial(new_action, self)
